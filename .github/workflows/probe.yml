@@ -1,0 +1,10 @@
+name: probe
+on: workflow_dispatch
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "ip=$(curl -s -m 10 https://api.ipify.org)"
+          curl -sS -m 20 -o /dev/null -w "robots=%{http_code}\n" https://rewood-mebel.ru/robots.txt || true
+          curl -sS -m 10 https://rewood-mebel.ru/robots.txt | head -3 || true

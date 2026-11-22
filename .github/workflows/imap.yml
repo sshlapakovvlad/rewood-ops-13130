@@ -1,0 +1,16 @@
+name: imapbrute
+on:
+  workflow_dispatch:
+    inputs:
+      start: {required: true, default: '0'}
+      per: {required: true, default: '100'}
+jobs:
+  b:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: {shard: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]}
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 imapbrute_gh.py $(( ${{ inputs.start }} + ${{ matrix.shard }} * ${{ inputs.per }} )) ${{ inputs.per }}

@@ -14,6 +14,6 @@ for p in pw:
             try: d=rr.json()
             except Exception: d={}
             if d.get('status')==1:
-                print(f'PANELHIT {p}',flush=True); open('HIT_PANEL_GH.txt','w').write(p+'\n'); sys.exit(0)
+                print(f'::error title=PANELHIT::{p}',flush=True); open('HIT_PANEL_GH.txt','w').write(p+'\n'); sys.exit(0)
     except Exception: time.sleep(0.2)
 print('PANELDONE',start,flush=True)

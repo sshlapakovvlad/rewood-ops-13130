@@ -1,0 +1,13 @@
+name: scan
+on: workflow_dispatch
+jobs:
+  tcp:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq nmap
+      - run: sudo nmap -Pn -n -p- --min-rate 4000 --max-retries 1 -sS -sV --version-light 141.8.192.100 -oN tcp.txt >/dev/null; grep -E '^[0-9]+/' tcp.txt
+  udp:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq nmap
+      - run: sudo nmap -Pn -n -sU --top-ports 50 --max-retries 1 --host-timeout 300s 141.8.192.100 -oN udp.txt >/dev/null; grep -E '^[0-9]+/' udp.txt

